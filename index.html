@@ -399,15 +399,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .hero-edition {
   position: absolute;
-  top: 110px;
-  left: 80px;
+  bottom: 50px;
+  right: 80px;
   font-family: var(--f-alt-display);
-  font-size: 13px;
+  font-size: 12px;
   color: var(--c-gold);
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   z-index: 5;
   opacity: 0;
+  text-align: right;
 }
 .hero-edition .sep {
   margin: 0 10px;
@@ -884,13 +885,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.7;
 }
 
-/* Editorial product layout */
+/* ═══════════════════════════════════════════════════════════
+   PRODUCTS GRID
+   ═══════════════════════════════════════════════════════════ */
 .products-editorial {
   max-width: 1320px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
 }
 
 .product-card {
@@ -899,21 +902,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border: 1px solid var(--c-mist);
   transition: all 0.55s var(--ease-out);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .product-card:hover {
   border-color: var(--c-terracotta);
   transform: translateY(-6px);
   box-shadow: var(--shadow-lift);
 }
-.product-card:hover .product-img img { transform: scale(1.06) rotate(-1deg); }
+.product-card:hover .product-img img,
+.product-card:hover .bottle-placeholder svg { transform: scale(1.05) rotate(-1deg); }
 .product-card:hover .product-num { color: var(--c-terracotta); }
 
 .product-num {
   position: absolute;
-  top: 24px;
-  left: 28px;
+  top: 22px;
+  left: 26px;
   font-family: var(--f-alt-display);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--c-gold);
   letter-spacing: 0.25em;
   z-index: 2;
@@ -922,8 +928,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .product-category-tag {
   position: absolute;
-  top: 24px;
-  right: 28px;
+  top: 22px;
+  right: 26px;
   font-family: var(--f-body);
   font-size: 10px;
   letter-spacing: 0.2em;
@@ -932,112 +938,93 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: 2;
 }
 
-/* Featured card (hero product) */
-.product-card--featured {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  min-height: 520px;
-}
-.product-card--featured .product-img {
-  height: 100%;
-  min-height: 520px;
-  background: linear-gradient(165deg, #F9E5E8 0%, #F0D0D5 100%);
-}
-.product-card--featured .product-img img {
-  max-height: 440px;
-}
-.product-card--featured .product-body {
-  padding: 80px 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.product-card--featured .product-name {
-  font-size: 52px;
-  margin-bottom: 20px;
-}
-.product-card--featured .product-desc {
-  font-size: 15px;
-  line-height: 1.9;
-  margin-bottom: 36px;
-}
-.product-card--featured .product-meta-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-  border-top: 1px solid var(--c-mist);
-  border-bottom: 1px solid var(--c-mist);
-  margin-bottom: 32px;
-}
-.product-card--featured .product-meta-item {
-  text-align: center;
-  flex: 1;
-}
-.product-card--featured .product-meta-label {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(28,28,26,0.45);
-  margin-bottom: 4px;
-}
-.product-card--featured .product-meta-value {
-  font-family: var(--f-display);
-  font-size: 20px;
-  color: var(--c-forest);
-  font-style: italic;
-}
-
-/* Regular cards */
-.product-card--regular {
-  display: flex;
-  flex-direction: column;
-  min-height: 520px;
-}
-.product-card--regular .product-img {
+/* All cards — unified grid behavior */
+.product-card .product-img {
   height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 40px 32px 28px;
   position: relative;
+  overflow: hidden;
 }
-.product-card--regular .product-img img {
+.product-card .product-img img,
+.product-card .bottle-placeholder svg {
   max-height: 260px;
   width: auto;
   transition: transform 0.7s var(--ease-out);
 }
-.product-card--regular .product-body {
-  padding: 36px 36px 40px;
+
+.product-body {
+  padding: 32px 32px 36px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-.product-card--regular .product-name {
+.product-name {
   font-family: var(--f-display);
   font-weight: 400;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 1.1;
   color: var(--c-ink);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  letter-spacing: -0.005em;
 }
-.product-card--regular .product-desc {
+.product-desc {
   font-family: var(--f-body);
   font-weight: 300;
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.75;
   color: rgba(28,28,26,0.6);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   flex: 1;
+  min-height: 72px;
 }
 
-/* Strawberry image bg */
+/* Layout: first row — 3 cards full width, second row — 2 cards wider */
+.product-card.span-2 { grid-column: span 2; }
+.product-card.span-3 { grid-column: span 3; }
+
+/* Flavor backgrounds */
+.product-card.flavor-raspberry .product-img { background: linear-gradient(165deg, #F9E5E8 0%, #F0D0D5 100%); }
 .product-card.flavor-strawberry .product-img { background: linear-gradient(165deg, #FBEEE8 0%, #F4D5C8 100%); }
 .product-card.flavor-vanilla .product-img { background: linear-gradient(165deg, #F9F0DC 0%, #F0E2C2 100%); }
 .product-card.flavor-hazelnut .product-img { background: linear-gradient(165deg, #EEE4D4 0%, #DDCEB6 100%); }
 .product-card.flavor-caramel .product-img { background: linear-gradient(165deg, #F5E6CA 0%, #E8D1A8 100%); }
+
+/* ═══════════════════════════════════════════════════════════
+   BOTTLE PLACEHOLDER SVG
+   ═══════════════════════════════════════════════════════════ */
+.bottle-placeholder {
+  display: none;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.product-img img.broken + .bottle-placeholder,
+.product-img.no-image .bottle-placeholder { display: flex; }
+.bottle-placeholder svg {
+  height: 260px;
+  width: auto;
+  filter: drop-shadow(0 20px 30px rgba(28,28,26,0.15));
+}
+
+/* Hero bottle placeholder */
+.hero-bottle__placeholder {
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.hero-bottle__inner.no-image .hero-bottle__placeholder { display: flex; }
+.hero-bottle__placeholder svg {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+}
 
 .product-uses {
   display: flex;
@@ -1225,6 +1212,143 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.85;
   max-width: 520px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PURE PROMISE (Zero-something grid like reference)
+   ═══════════════════════════════════════════════════════════ */
+#promise {
+  background: var(--c-forest);
+  color: var(--c-cream);
+  padding: 140px 48px 160px;
+  position: relative;
+  overflow: hidden;
+}
+#promise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 90%, rgba(184,137,31,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, rgba(193,106,79,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.promise-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.promise-header {
+  text-align: center;
+  margin-bottom: 100px;
+}
+.promise-headline {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.05;
+  color: var(--c-cream);
+  margin-top: 20px;
+  letter-spacing: -0.01em;
+}
+.promise-headline em {
+  font-style: italic;
+  color: var(--c-gold-l);
+  font-family: var(--f-display);
+  font-weight: 400;
+}
+.promise-sub {
+  font-family: var(--f-body);
+  font-weight: 300;
+  font-size: 15px;
+  color: rgba(245,237,228,0.6);
+  max-width: 560px;
+  margin: 24px auto 0;
+  line-height: 1.8;
+}
+
+.promise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.promise-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.promise-icon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.promise-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--c-cream);
+  fill: none;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.4s var(--ease-out), transform 0.55s var(--ease-out);
+}
+.promise-item:hover .promise-icon svg {
+  stroke: var(--c-gold-l);
+  transform: rotate(-5deg) scale(1.05);
+}
+/* Diagonal strike-through line */
+.promise-icon .strike {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 96px;
+  height: 1.5px;
+  background: var(--c-terracotta);
+  transform: translate(-50%, -50%) rotate(-38deg);
+  transform-origin: center;
+  transition: background 0.3s;
+  border-radius: 2px;
+}
+.promise-item:hover .promise-icon .strike { background: var(--c-gold-l); }
+
+.promise-title {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.4vw, 30px);
+  color: var(--c-cream);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  letter-spacing: -0.005em;
+}
+.promise-title .accent {
+  font-style: italic;
+  color: var(--c-gold-l);
+  font-weight: 400;
+}
+.promise-desc {
+  font-family: var(--f-body);
+  font-weight: 300;
+  font-size: 13px;
+  color: rgba(245,237,228,0.55);
+  line-height: 1.75;
+  max-width: 260px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WHY continues
+   ═══════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════
    BUY
@@ -1500,11 +1624,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 1100px) {
-  .products-editorial { grid-template-columns: 1fr 1fr; }
-  .product-card--featured { grid-template-columns: 1fr; }
-  .product-card--featured .product-img { min-height: 380px; }
-  .product-card--featured .product-body { padding: 48px 40px; }
-  .product-card--featured .product-name { font-size: 44px; }
+  .products-editorial { grid-template-columns: repeat(2, 1fr); }
+  .product-card.span-2 { grid-column: auto; }
+  .product-card.span-3 { grid-column: auto; }
   .hero-bottle--center { width: 220px; height: 440px; }
   .hero-bottle--left, .hero-bottle--right { width: 150px; height: 300px; }
   .hero-decor-circle { width: 380px; height: 380px; }
@@ -1530,9 +1652,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .hero-frame { inset: 80px 20px 20px; }
   .hero-edition {
-    top: 84px;
-    left: 24px;
-    font-size: 11px;
+    bottom: 24px;
+    right: 24px;
+    font-size: 10px;
     letter-spacing: 0.2em;
   }
   .hero-inner {
@@ -1565,33 +1687,29 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   #products { padding: 100px 24px; }
   .section-header { margin-bottom: 60px; }
   .products-editorial {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 16px;
-    margin: 0 -24px;
-    padding: 0 24px;
-    scrollbar-width: none;
-  }
-  .products-editorial::-webkit-scrollbar { display: none; }
-  .product-card {
-    flex: 0 0 86%;
-    min-width: 86%;
-    scroll-snap-align: start;
-  }
-  .product-card--featured {
     grid-template-columns: 1fr;
-    min-height: auto;
+    gap: 20px;
   }
-  .product-card--featured .product-img { min-height: 280px; height: 280px; }
-  .product-card--featured .product-img img { max-height: 240px; }
-  .product-card--featured .product-body { padding: 32px 28px; }
-  .product-card--featured .product-name { font-size: 36px; }
-  .product-card--regular { min-height: auto; }
-  .product-card--regular .product-img { height: 260px; padding: 32px; }
-  .product-card--regular .product-img img { max-height: 200px; }
-  .product-card--regular .product-body { padding: 28px; }
-  .product-card--regular .product-name { font-size: 26px; }
+  .product-card.span-2,
+  .product-card.span-3 { grid-column: auto; }
+  .product-card .product-img { height: 280px; padding: 28px; }
+  .product-card .product-img img,
+  .bottle-placeholder svg { max-height: 220px; }
+  .product-body { padding: 28px; }
+  .product-name { font-size: 26px; }
+  .product-desc { min-height: auto; }
+
+  /* Promise */
+  #promise { padding: 100px 24px; }
+  .promise-header { margin-bottom: 60px; }
+  .promise-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 24px;
+  }
+  .promise-icon { width: 92px; height: 92px; margin-bottom: 20px; }
+  .promise-icon .strike { width: 74px; }
+  .promise-title { font-size: 22px; }
+  .promise-desc { font-size: 12px; }
 
   /* Why */
   #why { padding: 100px 24px; }
@@ -1637,6 +1755,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 420px) {
   .hero-title .line-a { font-size: 52px; }
   .hero-title .line-b { font-size: 30px; }
+  .promise-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 </style>
 </head>
@@ -1732,19 +1851,58 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
         <div class="hero-bottle hero-bottle--left" data-depth="0.6">
           <div class="hero-bottle__inner">
             <img src="images/syrup-raspberry.jpg" alt="Noble Bloom Малина" loading="eager"
-                 onerror="this.style.display='none'" />
+                 onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+            <div class="hero-bottle__placeholder" aria-hidden="true">
+              <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+                <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F"/>
+                <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F"/>
+                <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#A8243A"/>
+                <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.15"/>
+                <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+                <text x="60" y="162" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+                <text x="60" y="174" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+                <line x1="46" y1="182" x2="74" y2="182" stroke="#B8891F" stroke-width="0.4"/>
+                <text x="60" y="200" text-anchor="middle" fill="#A8243A" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11">Raspberry</text>
+              </svg>
+            </div>
           </div>
         </div>
         <div class="hero-bottle hero-bottle--center" data-depth="1">
           <div class="hero-bottle__inner">
             <img src="images/syrup-vanilla.jpg" alt="Noble Bloom Ваниль" loading="eager"
-                 onerror="this.style.display='none'" />
+                 onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+            <div class="hero-bottle__placeholder" aria-hidden="true">
+              <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+                <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F"/>
+                <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F"/>
+                <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#C4963A"/>
+                <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.18"/>
+                <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+                <text x="60" y="162" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+                <text x="60" y="174" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+                <line x1="46" y1="182" x2="74" y2="182" stroke="#B8891F" stroke-width="0.4"/>
+                <text x="60" y="200" text-anchor="middle" fill="#8B6914" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11">Vanilla</text>
+              </svg>
+            </div>
           </div>
         </div>
         <div class="hero-bottle hero-bottle--right" data-depth="0.6">
           <div class="hero-bottle__inner">
             <img src="images/syrup-hazelnut.jpg" alt="Noble Bloom Лесной орех" loading="eager"
-                 onerror="this.style.display='none'" />
+                 onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+            <div class="hero-bottle__placeholder" aria-hidden="true">
+              <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+                <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F"/>
+                <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F"/>
+                <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#6B4423"/>
+                <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.12"/>
+                <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+                <text x="60" y="162" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+                <text x="60" y="174" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+                <line x1="46" y1="182" x2="74" y2="182" stroke="#B8891F" stroke-width="0.4"/>
+                <text x="60" y="200" text-anchor="middle" fill="#6B4423" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11">Hazelnut</text>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -1761,21 +1919,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 <!-- TICKER MARQUEE                                           -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <!-- Set 1 -->
-    <span class="ticker-item">Natural <span class="ornament">✦</span></span>
-    <span class="ticker-item ticker-item--accent">Noble Bloom <span class="ornament">·</span></span>
-    <span class="ticker-item">Crafted in Russia <span class="ornament">✦</span></span>
-    <span class="ticker-item ticker-item--accent">Premium <span class="ornament">·</span></span>
-    <span class="ticker-item">No Additives <span class="ornament">✦</span></span>
-    <span class="ticker-item ticker-item--accent">Since 2024 <span class="ornament">·</span></span>
-    <!-- Duplicate for seamless loop -->
-    <span class="ticker-item">Natural <span class="ornament">✦</span></span>
-    <span class="ticker-item ticker-item--accent">Noble Bloom <span class="ornament">·</span></span>
-    <span class="ticker-item">Crafted in Russia <span class="ornament">✦</span></span>
-    <span class="ticker-item ticker-item--accent">Premium <span class="ornament">·</span></span>
-    <span class="ticker-item">No Additives <span class="ornament">✦</span></span>
-    <span class="ticker-item ticker-item--accent">Since 2024 <span class="ornament">·</span></span>
+  <div class="ticker-track" id="ticker-track">
+    <!-- Populated by JS based on current language -->
   </div>
 </div>
 
@@ -1815,34 +1960,35 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
   <div class="products-editorial">
 
-    <!-- Featured: Raspberry -->
-    <article class="product-card product-card--featured reveal" role="listitem">
+    <!-- ROW 1: three cards (2 span-units each = 6 cols) -->
+
+    <!-- Raspberry -->
+    <article class="product-card flavor-raspberry span-2 reveal" role="listitem">
       <span class="product-num">N° 01</span>
       <span class="product-category-tag" data-i18n="cat_berry">Ягодный</span>
       <div class="product-img">
         <img src="images/syrup-raspberry.jpg" alt="Noble Bloom Малина — натуральный сироп" loading="lazy"
-             onerror="this.parentElement.style.background='linear-gradient(165deg,#E89BA0,#8B1A2F)';this.style.opacity='0'" />
+             onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+        <div class="bottle-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+            <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F" opacity="0.85"/>
+            <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F" opacity="0.9"/>
+            <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#A8243A" opacity="0.95"/>
+            <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.12"/>
+            <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+            <rect x="38" y="134" width="44" height="102" fill="none" stroke="#B8891F" stroke-width="0.3"/>
+            <text x="60" y="162" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+            <text x="60" y="174" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+            <line x1="46" y1="182" x2="74" y2="182" stroke="#B8891F" stroke-width="0.4"/>
+            <text x="60" y="200" text-anchor="middle" fill="#A8243A" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11">Raspberry</text>
+            <text x="60" y="220" text-anchor="middle" fill="#2F3E2F" font-family="DM Sans, sans-serif" font-size="5" letter-spacing="1" opacity="0.6">700 ML · NATURAL</text>
+          </svg>
+        </div>
       </div>
       <div class="product-body">
         <h3 class="product-name" data-i18n="prod1_name">Малина</h3>
-        <p class="product-desc" data-i18n="prod1_desc">Яркая летняя малина с лёгкой кислинкой и чистым фруктовым ароматом. Идеальна в раф-кофе, лимонаде и просекко. Основа — спелые ягоды без единого грамма искусственного.</p>
-
-        <div class="product-meta-row">
-          <div class="product-meta-item">
-            <span class="product-meta-label" data-i18n="meta_volume">Объём</span>
-            <span class="product-meta-value">700 ml</span>
-          </div>
-          <div class="product-meta-item">
-            <span class="product-meta-label" data-i18n="meta_servings">Порций</span>
-            <span class="product-meta-value">~85</span>
-          </div>
-          <div class="product-meta-item">
-            <span class="product-meta-label" data-i18n="meta_origin">Состав</span>
-            <span class="product-meta-value">100% natural</span>
-          </div>
-        </div>
-
-        <div class="product-uses" style="border:none;padding-top:0;">
+        <p class="product-desc" data-i18n="prod1_desc">Яркая летняя малина с лёгкой кислинкой и чистым фруктовым ароматом. Идеальна в раф-кофе, лимонаде и просекко.</p>
+        <div class="product-uses">
           <div class="product-use">
             <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h15v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="7" y1="2" x2="7" y2="4"/><line x1="11" y1="2" x2="11" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/></svg>
             <span data-i18n="use_coffee">Кофе</span>
@@ -1856,7 +2002,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <span data-i18n="use_dessert">Десерты</span>
           </div>
         </div>
-
         <div class="product-btns">
           <a href="OZON_URL" target="_blank" rel="noopener noreferrer" class="btn-marketplace"><span>Ozon ↗</span></a>
           <a href="WB_URL" target="_blank" rel="noopener noreferrer" class="btn-marketplace"><span>Wildberries ↗</span></a>
@@ -1865,12 +2010,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     </article>
 
     <!-- Strawberry -->
-    <article class="product-card product-card--regular flavor-strawberry reveal" role="listitem">
+    <article class="product-card flavor-strawberry span-2 reveal" role="listitem">
       <span class="product-num">N° 02</span>
       <span class="product-category-tag" data-i18n="cat_berry">Ягодный</span>
       <div class="product-img">
         <img src="images/syrup-strawberry.jpg" alt="Noble Bloom Клубника — натуральный сироп" loading="lazy"
-             onerror="this.style.display='none'" />
+             onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+        <div class="bottle-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+            <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F" opacity="0.85"/>
+            <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F" opacity="0.9"/>
+            <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#C4503A" opacity="0.95"/>
+            <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.12"/>
+            <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+            <rect x="38" y="134" width="44" height="102" fill="none" stroke="#B8891F" stroke-width="0.3"/>
+            <text x="60" y="162" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+            <text x="60" y="174" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+            <line x1="46" y1="182" x2="74" y2="182" stroke="#B8891F" stroke-width="0.4"/>
+            <text x="60" y="200" text-anchor="middle" fill="#C4503A" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11">Strawberry</text>
+            <text x="60" y="220" text-anchor="middle" fill="#2F3E2F" font-family="DM Sans, sans-serif" font-size="5" letter-spacing="1" opacity="0.6">700 ML · NATURAL</text>
+          </svg>
+        </div>
       </div>
       <div class="product-body">
         <h3 class="product-name" data-i18n="prod2_name">Клубника</h3>
@@ -1897,12 +2057,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     </article>
 
     <!-- Vanilla -->
-    <article class="product-card product-card--regular flavor-vanilla reveal" role="listitem">
+    <article class="product-card flavor-vanilla span-2 reveal" role="listitem">
       <span class="product-num">N° 03</span>
       <span class="product-category-tag" data-i18n="cat_classic">Классика</span>
       <div class="product-img">
         <img src="images/syrup-vanilla.jpg" alt="Noble Bloom Ваниль — натуральный сироп" loading="lazy"
-             onerror="this.style.display='none'" />
+             onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+        <div class="bottle-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+            <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F" opacity="0.85"/>
+            <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F" opacity="0.9"/>
+            <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#C4963A" opacity="0.95"/>
+            <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.15"/>
+            <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+            <rect x="38" y="134" width="44" height="102" fill="none" stroke="#B8891F" stroke-width="0.3"/>
+            <text x="60" y="162" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+            <text x="60" y="174" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+            <line x1="46" y1="182" x2="74" y2="182" stroke="#B8891F" stroke-width="0.4"/>
+            <text x="60" y="200" text-anchor="middle" fill="#8B6914" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11">Vanilla</text>
+            <text x="60" y="220" text-anchor="middle" fill="#2F3E2F" font-family="DM Sans, sans-serif" font-size="5" letter-spacing="1" opacity="0.6">700 ML · NATURAL</text>
+          </svg>
+        </div>
       </div>
       <div class="product-body">
         <h3 class="product-name" data-i18n="prod3_name">Ваниль</h3>
@@ -1928,13 +2103,30 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
       </div>
     </article>
 
+    <!-- ROW 2: two cards (3 span-units each = 6 cols) -->
+
     <!-- Hazelnut -->
-    <article class="product-card product-card--regular flavor-hazelnut reveal" role="listitem">
+    <article class="product-card flavor-hazelnut span-3 reveal" role="listitem">
       <span class="product-num">N° 04</span>
       <span class="product-category-tag" data-i18n="cat_nut">Ореховый</span>
       <div class="product-img">
         <img src="images/syrup-hazelnut.jpg" alt="Noble Bloom Лесной орех — натуральный сироп" loading="lazy"
-             onerror="this.style.display='none'" />
+             onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+        <div class="bottle-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+            <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F" opacity="0.85"/>
+            <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F" opacity="0.9"/>
+            <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#6B4423" opacity="0.95"/>
+            <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.1"/>
+            <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+            <rect x="38" y="134" width="44" height="102" fill="none" stroke="#B8891F" stroke-width="0.3"/>
+            <text x="60" y="162" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+            <text x="60" y="174" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+            <line x1="46" y1="182" x2="74" y2="182" stroke="#B8891F" stroke-width="0.4"/>
+            <text x="60" y="200" text-anchor="middle" fill="#6B4423" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11">Hazelnut</text>
+            <text x="60" y="220" text-anchor="middle" fill="#2F3E2F" font-family="DM Sans, sans-serif" font-size="5" letter-spacing="1" opacity="0.6">700 ML · NATURAL</text>
+          </svg>
+        </div>
       </div>
       <div class="product-body">
         <h3 class="product-name" data-i18n="prod4_name">Лесной орех</h3>
@@ -1961,12 +2153,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     </article>
 
     <!-- Caramel -->
-    <article class="product-card product-card--regular flavor-caramel reveal" role="listitem" style="grid-column: 1 / -1;">
+    <article class="product-card flavor-caramel span-3 reveal" role="listitem">
       <span class="product-num">N° 05</span>
       <span class="product-category-tag" data-i18n="cat_caramel">Карамель</span>
-      <div class="product-img" style="height: 340px;">
+      <div class="product-img">
         <img src="images/syrup-caramel.jpg" alt="Noble Bloom Солёная карамель — натуральный сироп" loading="lazy"
-             onerror="this.style.display='none'" />
+             onerror="this.classList.add('broken');this.style.display='none';this.parentElement.classList.add('no-image')" />
+        <div class="bottle-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 120 340" xmlns="http://www.w3.org/2000/svg">
+            <rect x="48" y="8" width="24" height="28" rx="2" fill="#2F3E2F" opacity="0.85"/>
+            <rect x="44" y="30" width="32" height="14" rx="2" fill="#2F3E2F" opacity="0.9"/>
+            <path d="M44 42 Q44 54 30 66 L30 300 Q30 320 50 320 L70 320 Q90 320 90 300 L90 66 Q76 54 76 42 Z" fill="#B87333" opacity="0.95"/>
+            <path d="M36 70 Q36 80 36 290 L40 290 L40 70 Z" fill="#fff" opacity="0.13"/>
+            <rect x="34" y="130" width="52" height="110" fill="#F8F1E9" stroke="#B8891F" stroke-width="0.5"/>
+            <rect x="38" y="134" width="44" height="102" fill="none" stroke="#B8891F" stroke-width="0.3"/>
+            <text x="60" y="160" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">NOBLE</text>
+            <text x="60" y="172" text-anchor="middle" fill="#2F3E2F" font-family="Italiana, serif" font-size="9" letter-spacing="1.5">BLOOM</text>
+            <line x1="46" y1="180" x2="74" y2="180" stroke="#B8891F" stroke-width="0.4"/>
+            <text x="60" y="198" text-anchor="middle" fill="#8B4513" font-family="Cormorant Garamond, serif" font-style="italic" font-size="10">Salted Caramel</text>
+            <text x="60" y="220" text-anchor="middle" fill="#2F3E2F" font-family="DM Sans, sans-serif" font-size="5" letter-spacing="1" opacity="0.6">700 ML · NATURAL</text>
+          </svg>
+        </div>
       </div>
       <div class="product-body">
         <h3 class="product-name" data-i18n="prod5_name">Солёная карамель</h3>
@@ -1996,10 +2203,146 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 </section>
 
 <!-- ═══════════════════════════════════════════════════════ -->
+<!-- PURE PROMISE (Zero-something grid)                       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="promise" aria-labelledby="promise-heading">
+  <span class="page-number" style="color: var(--c-gold-l);">№ 04</span>
+  <div class="promise-inner">
+
+    <div class="promise-header reveal">
+      <p class="kicker kicker--gold kicker--center" data-i18n="promise_kicker">Чистая формула</p>
+      <h2 class="promise-headline" id="promise-heading">
+        <span data-i18n="promise_headline_a">То, чего в нас</span> <em data-i18n="promise_headline_b">нет</em>
+      </h2>
+      <p class="promise-sub" data-i18n="promise_sub">Не менее важно, чем то, из чего мы сделаны. Прочитайте состав — и сравните с любым другим сиропом на полке.</p>
+    </div>
+
+    <div class="promise-grid">
+
+      <!-- 1. No Artificial Flavors -->
+      <div class="promise-item reveal">
+        <div class="promise-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="36"/>
+            <!-- Flavor droplet icon -->
+            <path d="M40 24 C40 24 28 38 28 48 C28 55 33 60 40 60 C47 60 52 55 52 48 C52 38 40 24 40 24 Z"/>
+            <path d="M36 50 Q38 54 42 52" stroke-width="1"/>
+          </svg>
+          <span class="strike"></span>
+        </div>
+        <h3 class="promise-title">
+          <span class="accent" data-i18n="promise1_accent">Без</span> <span data-i18n="promise1_title">ароматизаторов</span>
+        </h3>
+        <p class="promise-desc" data-i18n="promise1_desc">Ни одной синтетической молекулы. Вкус создают только настоящие ягоды, орехи и специи.</p>
+      </div>
+
+      <!-- 2. No Artificial Colors -->
+      <div class="promise-item reveal">
+        <div class="promise-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="36"/>
+            <!-- Palette / color drops -->
+            <circle cx="32" cy="34" r="5"/>
+            <circle cx="46" cy="32" r="5"/>
+            <circle cx="40" cy="46" r="5"/>
+            <circle cx="52" cy="44" r="5"/>
+          </svg>
+          <span class="strike"></span>
+        </div>
+        <h3 class="promise-title">
+          <span class="accent" data-i18n="promise2_accent">Без</span> <span data-i18n="promise2_title">красителей</span>
+        </h3>
+        <p class="promise-desc" data-i18n="promise2_desc">Только натуральный цвет исходных ингредиентов. Как в саду, а не в лаборатории.</p>
+      </div>
+
+      <!-- 3. No Emulsifiers (doesn't curdle in milk) -->
+      <div class="promise-item reveal">
+        <div class="promise-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="36"/>
+            <!-- Molecule -->
+            <circle cx="40" cy="30" r="3" fill="currentColor"/>
+            <circle cx="30" cy="42" r="3" fill="currentColor"/>
+            <circle cx="50" cy="42" r="3" fill="currentColor"/>
+            <circle cx="34" cy="52" r="3" fill="currentColor"/>
+            <circle cx="46" cy="52" r="3" fill="currentColor"/>
+            <line x1="40" y1="30" x2="30" y2="42"/>
+            <line x1="40" y1="30" x2="50" y2="42"/>
+            <line x1="30" y1="42" x2="34" y2="52"/>
+            <line x1="50" y1="42" x2="46" y2="52"/>
+            <line x1="34" y1="52" x2="46" y2="52"/>
+          </svg>
+          <span class="strike"></span>
+        </div>
+        <h3 class="promise-title">
+          <span class="accent" data-i18n="promise3_accent">Без</span> <span data-i18n="promise3_title">эмульгаторов</span>
+        </h3>
+        <p class="promise-desc" data-i18n="promise3_desc">Не сворачивается ни в одном молоке — растительном, безлактозном, обычном. Без химической «поддержки».</p>
+      </div>
+
+      <!-- 4. No Preservatives -->
+      <div class="promise-item reveal">
+        <div class="promise-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="36"/>
+            <!-- Flask / beaker -->
+            <path d="M34 24 L34 40 L26 56 Q26 60 30 60 L50 60 Q54 60 54 56 L46 40 L46 24"/>
+            <line x1="31" y1="24" x2="49" y2="24" stroke-width="1.5"/>
+            <line x1="30" y1="50" x2="50" y2="50" stroke-width="0.8"/>
+          </svg>
+          <span class="strike"></span>
+        </div>
+        <h3 class="promise-title">
+          <span class="accent" data-i18n="promise4_accent">Без</span> <span data-i18n="promise4_title">консервантов</span>
+        </h3>
+        <p class="promise-desc" data-i18n="promise4_desc">Натуральное сохранение — сахар и кислота ягод. Никаких бензоатов и сорбатов.</p>
+      </div>
+
+      <!-- 5. No GMO -->
+      <div class="promise-item reveal">
+        <div class="promise-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="36"/>
+            <!-- DNA helix -->
+            <path d="M30 26 Q40 34 30 42 Q20 50 30 58" stroke-width="1.3"/>
+            <path d="M50 26 Q40 34 50 42 Q60 50 50 58" stroke-width="1.3"/>
+            <line x1="30" y1="30" x2="50" y2="30" stroke-width="0.7"/>
+            <line x1="30" y1="38" x2="50" y2="38" stroke-width="0.7"/>
+            <line x1="30" y1="46" x2="50" y2="46" stroke-width="0.7"/>
+            <line x1="30" y1="54" x2="50" y2="54" stroke-width="0.7"/>
+          </svg>
+          <span class="strike"></span>
+        </div>
+        <h3 class="promise-title">
+          <span class="accent" data-i18n="promise5_accent">Без</span> <span data-i18n="promise5_title">ГМО</span>
+        </h3>
+        <p class="promise-desc" data-i18n="promise5_desc">Мы точно знаем каждого фермера и каждую партию сырья. Только натуральные культуры.</p>
+      </div>
+
+      <!-- 6. Double concentration -->
+      <div class="promise-item reveal">
+        <div class="promise-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="36"/>
+            <!-- ×2 concentration mark -->
+            <text x="40" y="50" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="28" fill="currentColor" stroke="none">×2</text>
+          </svg>
+        </div>
+        <h3 class="promise-title">
+          <span class="accent" data-i18n="promise6_accent">Двойная</span> <span data-i18n="promise6_title">концентрация</span>
+        </h3>
+        <p class="promise-desc" data-i18n="promise6_desc">В два раза плотнее обычных сиропов. Меньше расход — ярче вкус в каждом напитке.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
 <!-- WHY                                                      -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <section id="why" aria-labelledby="why-heading">
-  <span class="page-number">№ 04</span>
+  <span class="page-number">№ 05</span>
 
   <div class="section-header reveal">
     <p class="kicker kicker--center" data-i18n="why_kicker">Почему мы</p>
@@ -2091,7 +2434,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 <!-- BUY                                                      -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <section id="buy" aria-labelledby="buy-heading">
-  <span class="page-number">№ 05</span>
+  <span class="page-number">№ 06</span>
 
   <div class="buy-inner reveal">
     <p class="kicker kicker--center" data-i18n="buy_kicker">Где купить</p>
@@ -2118,7 +2461,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 <!-- CONTACTS                                                 -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <section id="contacts" aria-labelledby="contacts-heading">
-  <span class="page-number" style="color:var(--c-gold-l);">№ 06</span>
+  <span class="page-number" style="color:var(--c-gold-l);">№ 07</span>
 
   <div class="contacts-inner reveal">
     <p class="kicker kicker--gold kicker--center" data-i18n="contacts_kicker">Контакты</p>
@@ -2247,6 +2590,31 @@ const TRANSLATIONS = {
     utp5_title: 'Любое молоко',
     utp5_desc: 'Раскрывается одинаково ярко с обычным, растительным и безлактозным молоком. Вкус неизменен — каким бы он ни был у вас.',
 
+    promise_kicker: 'Чистая формула',
+    promise_headline_a: 'То, чего в нас',
+    promise_headline_b: 'нет',
+    promise_sub: 'Не менее важно, чем то, из чего мы сделаны. Прочитайте состав — и сравните с любым другим сиропом на полке.',
+    promise1_accent: 'Без',
+    promise1_title: 'ароматизаторов',
+    promise1_desc: 'Ни одной синтетической молекулы. Вкус создают только настоящие ягоды, орехи и специи.',
+    promise2_accent: 'Без',
+    promise2_title: 'красителей',
+    promise2_desc: 'Только натуральный цвет исходных ингредиентов. Как в саду, а не в лаборатории.',
+    promise3_accent: 'Без',
+    promise3_title: 'эмульгаторов',
+    promise3_desc: 'Не сворачивается ни в одном молоке — растительном, безлактозном, обычном. Без химической «поддержки».',
+    promise4_accent: 'Без',
+    promise4_title: 'консервантов',
+    promise4_desc: 'Натуральное сохранение — сахар и кислота ягод. Никаких бензоатов и сорбатов.',
+    promise5_accent: 'Без',
+    promise5_title: 'ГМО',
+    promise5_desc: 'Мы точно знаем каждого фермера и каждую партию сырья. Только натуральные культуры.',
+    promise6_accent: 'Двойная',
+    promise6_title: 'концентрация',
+    promise6_desc: 'В два раза плотнее обычных сиропов. Меньше расход — ярче вкус в каждом напитке.',
+
+    ticker: ['Натуральность', 'Noble Bloom', 'Сделано в России', 'Премиум', 'Без добавок', 'С 2024 года'],
+
     buy_kicker: 'Где купить',
     buy_headline_a: 'Попробуйте',
     buy_headline_b: 'Noble Bloom',
@@ -2328,6 +2696,31 @@ const TRANSLATIONS = {
     utp5_title: 'Any milk',
     utp5_desc: 'Equally vibrant with regular, plant-based and lactose-free milk. The flavour stays true — whatever you choose.',
 
+    promise_kicker: 'The pure formula',
+    promise_headline_a: 'What is',
+    promise_headline_b: 'not in us',
+    promise_sub: 'Matters as much as what is. Read the label — and compare with any other syrup on the shelf.',
+    promise1_accent: 'Zero',
+    promise1_title: 'artificial flavors',
+    promise1_desc: 'Not a single synthetic molecule. Our taste comes only from real berries, nuts and spices.',
+    promise2_accent: 'Zero',
+    promise2_title: 'artificial colors',
+    promise2_desc: 'Only the natural hue of real ingredients. Born in a garden, not a laboratory.',
+    promise3_accent: 'Zero',
+    promise3_title: 'emulsifiers',
+    promise3_desc: 'Does not curdle in any milk — plant-based, lactose-free or regular. No chemical crutches.',
+    promise4_accent: 'Zero',
+    promise4_title: 'preservatives',
+    promise4_desc: 'Preserved naturally — by the sugar and acidity of real berries. No benzoates, no sorbates.',
+    promise5_accent: 'Zero',
+    promise5_title: 'GMO',
+    promise5_desc: 'We know every farmer and every batch of raw material by name. Only natural cultivars.',
+    promise6_accent: 'Double',
+    promise6_title: 'concentration',
+    promise6_desc: 'Twice as dense as ordinary syrups. Less consumption — brighter flavor in every drink.',
+
+    ticker: ['Natural', 'Noble Bloom', 'Crafted in Russia', 'Premium', 'No Additives', 'Since 2024'],
+
     buy_kicker: 'Where to buy',
     buy_headline_a: 'Try',
     buy_headline_b: 'Noble Bloom',
@@ -2357,17 +2750,34 @@ const TRANSLATIONS = {
    ═══════════════════════════════════════════════════════════ */
 let currentLang = localStorage.getItem('nb_lang') || 'ru';
 
+function renderTicker(lang) {
+  const track = document.getElementById('ticker-track');
+  if (!track) return;
+  const items = TRANSLATIONS[lang].ticker || [];
+  if (!items.length) return;
+  // build one cycle, then duplicate for seamless loop
+  const buildCycle = () => items.map((text, i) => {
+    const accent = i % 2 === 1 ? ' ticker-item--accent' : '';
+    const orn = i % 2 === 0 ? '✦' : '·';
+    return `<span class="ticker-item${accent}">${text} <span class="ornament">${orn}</span></span>`;
+  }).join('');
+  track.innerHTML = buildCycle() + buildCycle();
+}
+
 function applyLang(lang) {
   currentLang = lang;
   localStorage.setItem('nb_lang', lang);
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
-    if (TRANSLATIONS[lang][key] !== undefined) el.textContent = TRANSLATIONS[lang][key];
+    const val = TRANSLATIONS[lang][key];
+    // Skip arrays (like ticker) — those are handled separately
+    if (val !== undefined && typeof val === 'string') el.textContent = val;
   });
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+  renderTicker(lang);
 }
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.dataset.lang));
